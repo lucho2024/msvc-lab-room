@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import reactor.core.publisher.Flux;
 
@@ -40,12 +39,13 @@ public class MsvcLabRoomApplication implements CommandLineRunner {
 
         Flux.just(vip, noVip)
                 .flatMap(rt -> roomTypeRepository.save(rt))
-                .doOnNext(rt -> log.info("insert room type : "+rt.getId()))
+                .doOnNext(rt -> log.info("insert room type : " + rt.getId()))
                 .thenMany(Flux.just(
 
-                        Room.builder().roomNumber(1).roomType(vip).description("suite")
+                        Room.builder().roomNumber(1).roomType(vip).description("suite").HotelId("sdsads1111")
                                 .maxGuest(5).build(),
-                        Room.builder().roomNumber(1).roomType(noVip).description("normal").build()
+                        Room.builder().roomNumber(1).roomType(noVip).description("normal").HotelId("dsds1111")
+                                .maxGuest(4).build()
 
                 ).flatMap(r -> roomRepository.save(r)))
                 .subscribe(r -> log.info("Insert room : " + r.getId()));
