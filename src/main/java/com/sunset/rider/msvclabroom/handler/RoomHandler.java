@@ -68,6 +68,7 @@ public class RoomHandler {
                         List<String> errorList = new ArrayList<>();
                         errors.getFieldErrors().forEach(e -> errorList.add(e.getDefaultMessage()));
                         erroresMap.put("errores", errorList);
+                        erroresMap.put("timestamp", LocalDateTime.now());
 
                         return ServerResponse.badRequest().body(BodyInserters.fromValue(erroresMap));
                     } else {
@@ -131,7 +132,9 @@ public class RoomHandler {
     public Mono<ServerResponse> delete(ServerRequest serverRequest) {
         String id = serverRequest.pathVariable("id");
 
-        return roomService.delete(id).then(ServerResponse.noContent().build());
+        return roomService.delete(id)
+                .then(ServerResponse.noContent().build());
+
     }
 
     public Mono<ServerResponse> getAllTypes(ServerRequest request) {

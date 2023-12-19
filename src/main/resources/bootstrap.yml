@@ -21,3 +21,12 @@ logging:
               MongoTemplate: DEBUG
   pattern:
     console: "%d{'yyyy-MM-dd HH:mm:ss,SSS',America/Mexico_City} %clr(%-5level) (%cyan(%logger{15}) [%X{headers}] : %msg %n"
+
+
+apis:
+  updated-by-room-id: "/room/{id}"
+  get-by-room-id: "/room/{id}"
+  deleted-by-room-id: "/room/{id}"
+  create-room: "/room"
+  find-all: "/room"
+  find-all-types: "/type"
