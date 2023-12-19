@@ -5,3 +5,19 @@ spring:
 
 server:
   port: 8081
+
+
+logging:
+  level:
+    com:
+      sunset:
+        rider:
+          msvclabhotel: DEBUG
+    org:
+      springframework:
+        data:
+          mongodb:
+            core:
+              MongoTemplate: DEBUG
+  pattern:
+    console: "%d{'yyyy-MM-dd HH:mm:ss,SSS',America/Mexico_City} %clr(%-5level) (%cyan(%logger{15}) [%X{headers}] : %msg %n"
