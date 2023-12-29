@@ -18,4 +18,6 @@ public interface RoomService {
     Mono<Void> delete(String id);
 
     Flux<RoomType> findAllRoomTypes();
+
+    Flux<Room> findByHotelId(String id);
 }

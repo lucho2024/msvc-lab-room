@@ -38,6 +38,7 @@ apis:
   create-room: "/room"
   find-all: "/room"
   find-all-types: "/type"
+  find-all-room-by-hotel: "/room/hotel/{id}"
 
 eureka:
   client:

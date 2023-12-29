@@ -12,6 +12,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import reactor.core.publisher.Flux;
 
+import java.time.LocalDateTime;
+
 @SpringBootApplication
 @Slf4j
 public class MsvcLabRoomApplication implements CommandLineRunner {
@@ -42,9 +44,20 @@ public class MsvcLabRoomApplication implements CommandLineRunner {
                 .doOnNext(rt -> log.info("insert room type : " + rt.getId()))
                 .thenMany(Flux.just(
 
-                        Room.builder().roomNumber(1).roomType(vip).description("suite").HotelId("sdsads1111")
+                        Room.builder().roomNumber(1).roomType(vip).description("suite").hotelId("sdsads1111")
+                                .floor(1)
+                                .createdAt(LocalDateTime.now())
+                                .updatedAt(LocalDateTime.now())
                                 .maxGuest(5).build(),
-                        Room.builder().roomNumber(1).roomType(noVip).description("normal").HotelId("dsds1111")
+                        Room.builder().roomNumber(1).roomType(noVip).description("normal").hotelId("dsds1111")
+                                .floor(2)
+                                .createdAt(LocalDateTime.now())
+                                .updatedAt(LocalDateTime.now())
+                                .maxGuest(4).build(),
+                        Room.builder().roomNumber(10).roomType(vip).description("suite").hotelId("dsds1111")
+                                .floor(3)
+                                .createdAt(LocalDateTime.now())
+                                .updatedAt(LocalDateTime.now())
                                 .maxGuest(4).build()
 
                 ).flatMap(r -> roomRepository.save(r)))

@@ -47,4 +47,9 @@ public class RoomServiceImpl implements RoomService{
     public Flux<RoomType> findAllRoomTypes() {
         return roomTypeRepository.findAll();
     }
+
+    @Override
+    public Flux<Room> findByHotelId(String id) {
+        return roomRepository.findByHotelId(id);
+    }
 }

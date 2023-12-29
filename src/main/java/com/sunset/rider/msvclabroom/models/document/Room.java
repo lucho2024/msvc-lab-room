@@ -28,7 +28,7 @@ public class Room {
 
     private RoomType roomType;
 
-    private String HotelId;
+    private String hotelId;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime createdAt;

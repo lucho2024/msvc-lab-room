@@ -146,12 +146,35 @@ public class RoomHandler {
 
     }
 
+    public Mono<ServerResponse> finByHotelId(ServerRequest request) {
+        String id = request.pathVariable("id");
+
+        return roomService.findByHotelId(id)
+                .collectList()
+                .flatMap(room -> {
+
+                    if (!room.isEmpty()) {
+                        return ServerResponse
+                                .ok().contentType(MediaType.APPLICATION_JSON)
+                                .body(BodyInserters.fromValue(room));
+                    } else {
+                        return ServerResponse
+                                .status(HttpStatus.NOT_FOUND)
+                                .body(BodyInserters.fromValue(ErrorNotFound.error(id)));
+                    }
+
+
+                });
+
+
+    }
+
     public Room buildDbObjet(RoomRequest roomRequest, String id, Room room) {
 
         return Room.builder()
                 .id(StringUtils.isEmpty(id) ? null : id)
                 .roomNumber(roomRequest.getRoomNumber())
-                .floor(roomRequest.getFloor()).HotelId(roomRequest.getHotelId())
+                .floor(roomRequest.getFloor()).hotelId(roomRequest.getHotelId())
                 .maxGuest(roomRequest.getMaxGuest())
                 .description(roomRequest.getDescription())
                 .createdAt(StringUtils.isEmpty(id) ? LocalDateTime.now() : room.getCreatedAt())

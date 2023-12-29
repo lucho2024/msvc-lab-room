@@ -25,6 +25,9 @@ public class RouterConfig {
     @Value("${apis.find-all-types}")
     private String findAllType;
 
+    @Value("${apis.find-all-room-by-hotel}")
+    private String findByHotelId;
+
     @Bean
     public RouterFunction<ServerResponse> rutasRoom(RoomHandler roomHandler) {
         return RouterFunctions.route(RequestPredicates.GET(findAll), roomHandler::findAll)
@@ -32,7 +35,8 @@ public class RouterConfig {
                 .andRoute(RequestPredicates.POST(save), roomHandler::save)
                 .andRoute(RequestPredicates.PUT(update), roomHandler::update)
                 .andRoute(RequestPredicates.DELETE(delete), roomHandler::delete)
-                .andRoute(RequestPredicates.GET(findAllType), roomHandler::getAllTypes);
+                .andRoute(RequestPredicates.GET(findAllType), roomHandler::getAllTypes)
+                .andRoute(RequestPredicates.GET(findByHotelId),roomHandler::finByHotelId);
     }
 
 }
