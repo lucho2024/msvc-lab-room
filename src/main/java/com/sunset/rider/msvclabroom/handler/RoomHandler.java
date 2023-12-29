@@ -176,6 +176,7 @@ public class RoomHandler {
                 .roomNumber(roomRequest.getRoomNumber())
                 .floor(roomRequest.getFloor()).hotelId(roomRequest.getHotelId())
                 .maxGuest(roomRequest.getMaxGuest())
+                .price(roomRequest.getPrice())
                 .description(roomRequest.getDescription())
                 .createdAt(StringUtils.isEmpty(id) ? LocalDateTime.now() : room.getCreatedAt())
                 .updatedAt(LocalDateTime.now())

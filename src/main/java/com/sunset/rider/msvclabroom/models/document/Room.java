@@ -30,6 +30,8 @@ public class Room {
 
     private String hotelId;
 
+    private Double price;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime createdAt;
 

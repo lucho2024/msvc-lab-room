@@ -31,4 +31,7 @@ public class RoomRequest {
     @NotEmpty(message = "hotelId no puede ser vacio o nulo")
     private String hotelId;
 
+    @NotNull(message = "no puede ser vacio o nulo")
+    private Double price;
+
 }
