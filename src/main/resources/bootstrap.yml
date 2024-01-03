@@ -62,3 +62,7 @@ management:
   health:
     default:
       enabled: true
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
