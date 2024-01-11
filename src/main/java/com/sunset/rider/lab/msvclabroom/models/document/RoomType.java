@@ -1,4 +1,4 @@
-package com.sunset.rider.msvclabroom.models.document;
+package com.sunset.rider.lab.msvclabroom.models.document;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;

@@ -1,14 +1,15 @@
-package com.sunset.rider.msvclabroom;
+package com.sunset.rider.lab.msvclabroom;
 
-import com.sunset.rider.msvclabroom.models.document.Room;
-import com.sunset.rider.msvclabroom.models.document.RoomType;
-import com.sunset.rider.msvclabroom.repository.RoomRepository;
-import com.sunset.rider.msvclabroom.repository.RoomTypeRepository;
+import com.sunset.rider.lab.msvclabroom.models.document.Room;
+import com.sunset.rider.lab.msvclabroom.models.document.RoomType;
+import com.sunset.rider.lab.msvclabroom.repository.RoomRepository;
+import com.sunset.rider.lab.msvclabroom.repository.RoomTypeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import reactor.core.publisher.Flux;
 
@@ -16,6 +17,7 @@ import java.time.LocalDateTime;
 
 @SpringBootApplication
 @Slf4j
+@ComponentScan({"com.sunset.rider.lab.msvclabroom","com.sunset.rider.lab.exceptions"})
 public class MsvcLabRoomApplication implements CommandLineRunner {
     @Autowired
     private RoomRepository roomRepository;

@@ -1,15 +1,19 @@
-package com.sunset.rider.msvclabroom.handler;
+package com.sunset.rider.lab.msvclabroom.handler;
 
-import com.sunset.rider.msvclabroom.models.document.Room;
-import com.sunset.rider.msvclabroom.models.document.RoomType;
-import com.sunset.rider.msvclabroom.models.request.RoomRequest;
-import com.sunset.rider.msvclabroom.models.utils.ErrorNotFound;
-import com.sunset.rider.msvclabroom.services.RoomServiceImpl;
+import com.sunset.rider.lab.exceptions.exception.NotFoundException;
+import com.sunset.rider.lab.msvclabroom.models.document.Room;
+import com.sunset.rider.lab.msvclabroom.models.document.RoomType;
+import com.sunset.rider.lab.msvclabroom.properties.HeadersProperties;
+import com.sunset.rider.lab.msvclabroom.services.RoomServiceImpl;
+import com.sunset.rider.lab.msvclabroom.models.request.RoomRequest;
+import com.sunset.rider.lab.msvclabroom.models.utils.ErrorNotFound;
+import com.sunset.rider.lab.msvclabroom.util.Utils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
+import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -35,13 +39,21 @@ public class RoomHandler {
     @Autowired
     private Validator validator;
 
+    @Autowired
+    private HeadersProperties headersProperties;
 
     public Mono<ServerResponse> findAll(ServerRequest request) {
+
+
+        Utils.validHeaders(request.headers().asHttpHeaders().toSingleValueMap(),headersProperties.getRequired());
+
 
         return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(roomService.findAll(), Room.class);
     }
 
     public Mono<ServerResponse> findById(ServerRequest request) {
+
+        Utils.validHeaders(request.headers().asHttpHeaders().toSingleValueMap(),headersProperties.getRequired());
 
         String id = request.pathVariable("id");
 
@@ -49,12 +61,12 @@ public class RoomHandler {
                 .flatMap(room -> ServerResponse
                         .ok().contentType(MediaType.APPLICATION_JSON)
                         .body(BodyInserters.fromValue(room)))
-                .switchIfEmpty(ServerResponse
-                        .status(HttpStatus.NOT_FOUND)
-                        .body(BodyInserters.fromValue(ErrorNotFound.error(id))));
+                .switchIfEmpty(Mono.error(new NotFoundException(id)));
     }
 
     public Mono<ServerResponse> save(ServerRequest request) {
+
+        Utils.validHeaders(request.headers().asHttpHeaders().toSingleValueMap(),headersProperties.getRequired());
         Mono<RoomRequest> roomRequest = request.bodyToMono(RoomRequest.class);
 
         return roomRequest
@@ -88,7 +100,7 @@ public class RoomHandler {
     }
 
     public Mono<ServerResponse> update(ServerRequest request) {
-
+        Utils.validHeaders(request.headers().asHttpHeaders().toSingleValueMap(),headersProperties.getRequired());
         String id = request.pathVariable("id");
         Mono<RoomRequest> roomRequestMono = request.bodyToMono(RoomRequest.class);
 
@@ -117,10 +129,11 @@ public class RoomHandler {
                     }
 
                 })
-                .switchIfEmpty(ServerResponse
-                        .status(HttpStatus.NOT_FOUND)
-                        .body(BodyInserters.fromValue(ErrorNotFound.error(id))))
+                .switchIfEmpty(Mono.error(new NotFoundException(id)))
                 .onErrorResume(error -> {
+                    if (error instanceof NotFoundException) {
+                        return Mono.error(error);
+                    }
                     WebClientResponseException errorResponse = (WebClientResponseException) error;
 
                     return Mono.error(errorResponse);
@@ -130,6 +143,7 @@ public class RoomHandler {
     }
 
     public Mono<ServerResponse> delete(ServerRequest serverRequest) {
+        Utils.validHeaders(serverRequest.headers().asHttpHeaders().toSingleValueMap(),headersProperties.getRequired());
         String id = serverRequest.pathVariable("id");
 
         return roomService.delete(id)
@@ -138,7 +152,7 @@ public class RoomHandler {
     }
 
     public Mono<ServerResponse> getAllTypes(ServerRequest request) {
-
+        Utils.validHeaders(request.headers().asHttpHeaders().toSingleValueMap(),headersProperties.getRequired());
 
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
@@ -147,6 +161,7 @@ public class RoomHandler {
     }
 
     public Mono<ServerResponse> finByHotelId(ServerRequest request) {
+        Utils.validHeaders(request.headers().asHttpHeaders().toSingleValueMap(),headersProperties.getRequired());
         String id = request.pathVariable("id");
 
         return roomService.findByHotelId(id)
@@ -158,9 +173,8 @@ public class RoomHandler {
                                 .ok().contentType(MediaType.APPLICATION_JSON)
                                 .body(BodyInserters.fromValue(room));
                     } else {
-                        return ServerResponse
-                                .status(HttpStatus.NOT_FOUND)
-                                .body(BodyInserters.fromValue(ErrorNotFound.error(id)));
+                        throw  new NotFoundException(id);
+
                     }
 
 

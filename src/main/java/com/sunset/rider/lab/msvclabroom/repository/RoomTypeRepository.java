@@ -1,7 +1,6 @@
-package com.sunset.rider.msvclabroom.repository;
+package com.sunset.rider.lab.msvclabroom.repository;
 
-import com.sun.jdi.StringReference;
-import com.sunset.rider.msvclabroom.models.document.RoomType;
+import com.sunset.rider.lab.msvclabroom.models.document.RoomType;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.stereotype.Repository;
 

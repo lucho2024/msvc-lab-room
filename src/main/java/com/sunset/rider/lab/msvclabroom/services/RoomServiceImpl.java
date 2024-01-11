@@ -1,9 +1,9 @@
-package com.sunset.rider.msvclabroom.services;
+package com.sunset.rider.lab.msvclabroom.services;
 
-import com.sunset.rider.msvclabroom.models.document.Room;
-import com.sunset.rider.msvclabroom.models.document.RoomType;
-import com.sunset.rider.msvclabroom.repository.RoomRepository;
-import com.sunset.rider.msvclabroom.repository.RoomTypeRepository;
+import com.sunset.rider.lab.msvclabroom.repository.RoomTypeRepository;
+import com.sunset.rider.lab.msvclabroom.models.document.Room;
+import com.sunset.rider.lab.msvclabroom.models.document.RoomType;
+import com.sunset.rider.lab.msvclabroom.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;

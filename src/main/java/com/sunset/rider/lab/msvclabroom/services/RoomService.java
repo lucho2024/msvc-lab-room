@@ -1,7 +1,7 @@
-package com.sunset.rider.msvclabroom.services;
+package com.sunset.rider.lab.msvclabroom.services;
 
-import com.sunset.rider.msvclabroom.models.document.Room;
-import com.sunset.rider.msvclabroom.models.document.RoomType;
+import com.sunset.rider.lab.msvclabroom.models.document.Room;
+import com.sunset.rider.lab.msvclabroom.models.document.RoomType;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 

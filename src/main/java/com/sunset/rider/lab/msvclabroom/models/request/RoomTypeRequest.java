@@ -1,4 +1,4 @@
-package com.sunset.rider.msvclabroom.models.request;
+package com.sunset.rider.lab.msvclabroom.models.request;
 
 import lombok.Builder;
 import lombok.Getter;

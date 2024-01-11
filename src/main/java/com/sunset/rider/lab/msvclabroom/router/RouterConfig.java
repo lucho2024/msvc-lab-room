@@ -1,7 +1,7 @@
-package com.sunset.rider.msvclabroom.config;
+package com.sunset.rider.lab.msvclabroom.router;
 
-import com.sunset.rider.msvclabroom.handler.RoomHandler;
-import com.sunset.rider.msvclabroom.models.document.Room;
+import com.sunset.rider.lab.msvclabroom.handler.RoomHandler;
+import com.sunset.rider.lab.msvclabroom.models.document.Room;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

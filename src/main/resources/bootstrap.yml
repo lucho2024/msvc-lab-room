@@ -9,7 +9,17 @@ spring:
   data:
     mongodb:
       uri: mongodb://localhost:27017/roomDb
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9090/realms/lab-hotel-realm
+          jwk-set-uri: http://localhost:9090/realms/lab-hotel-realm/protocol/openid-connect/certs
 
+jwt:
+  attribute:
+    preferredUsername: preferred_username
+    clientId: web-client-api
 
 server:
   port: 8081
@@ -42,6 +52,7 @@ apis:
 
 eureka:
   client:
+    enabled: false
     serviceUrl:
       defaultZone: http://localhost:8761/eureka
 
@@ -66,3 +77,8 @@ management:
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
+
+
+headers:
+  required:
+    - Authorization

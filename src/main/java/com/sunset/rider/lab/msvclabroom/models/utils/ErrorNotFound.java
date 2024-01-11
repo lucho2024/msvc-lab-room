@@ -1,4 +1,4 @@
-package com.sunset.rider.msvclabroom.models.utils;
+package com.sunset.rider.lab.msvclabroom.models.utils;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;

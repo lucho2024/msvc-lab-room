@@ -1,4 +1,4 @@
-package com.sunset.rider.msvclabroom.models.request;
+package com.sunset.rider.lab.msvclabroom.models.request;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -31,7 +31,7 @@ public class RoomRequest {
     @NotEmpty(message = "hotelId no puede ser vacio o nulo")
     private String hotelId;
 
-    @NotNull(message = "no puede ser vacio o nulo")
+    @NotNull(message = "price no puede ser vacio o nulo")
     private Double price;
 
 }
