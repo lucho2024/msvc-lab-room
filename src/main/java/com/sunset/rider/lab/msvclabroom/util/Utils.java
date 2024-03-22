@@ -20,13 +20,13 @@ public class Utils {
 
         List<String> headersin = new ArrayList<>();
         headers.entrySet().stream().forEach(k -> {
-            headersin.add(k.getKey());
+            headersin.add(k.getKey().toUpperCase());
 
         });
 
         headersValid.forEach(h -> {
-            if (!headersin.contains(h)) {
-                headersOut.add(h);
+            if (!headersin.contains(h.toUpperCase())) {
+                headersOut.add(h.toUpperCase());
             }
         });
 

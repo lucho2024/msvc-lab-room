@@ -34,7 +34,7 @@ public class MsvcLabRoomApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
+/*
         mongoTemplate.dropCollection("rooms").subscribe();
         mongoTemplate.dropCollection("roomsType").subscribe();
 
@@ -65,6 +65,6 @@ public class MsvcLabRoomApplication implements CommandLineRunner {
                 ).flatMap(r -> roomRepository.save(r)))
                 .subscribe(r -> log.info("Insert room : " + r.getId()));
 
-
+*/
     }
 }
